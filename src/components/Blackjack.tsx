@@ -170,7 +170,7 @@ const Blackjack = () => {
             {gameState === "gameOver" && <p>Total: {calculateHandValue(dealerHand)}</p>}
           </div>
           <div className={styles.hand}>
-            <h3>Player's Hand ({calculateHandValue(playerHand)})</h3>
+            <h3>Player's Hands ({calculateHandValue(playerHand)})</h3>
             <div className={styles.cards}>
               {playerHand.map((card, index) => (
                 <Card key={index} {...card} />
