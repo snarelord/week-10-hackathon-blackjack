@@ -1,0 +1,102 @@
+import { render, screen, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import Blackjack from './Blackjack'
+import * as deckUtils from '@/utils/deck'
+
+jest.mock('@/utils/deck')
+
+describe('Blackjack Component', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+    jest.spyOn(deckUtils, 'createBlackjackDeck').mockReturnValue([])
+  })
+
+  test('renders initial game state', () => {
+    render(<Blackjack />)
+    
+    expect(screen.getByText('Blackjack')).toBeInTheDocument()
+    expect(screen.getByText("Dealer's Hand")).toBeInTheDocument()
+    expect(screen.getByText(/Player's Hand/)).toBeInTheDocument()
+    expect(screen.getByText('Balance: £1000')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Enter bet amount')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Place Bet' })).toBeInTheDocument()
+  })
+
+  test('handles invalid bet input', () => {
+    render(<Blackjack />)
+    
+    const betInput = screen.getByPlaceholderText('Enter bet amount')
+    const placeBetButton = screen.getByRole('button', { name: 'Place Bet' })
+
+    // Test invalid bet amount
+    fireEvent.change(betInput, { target: { value: '-50' } })
+    fireEvent.click(placeBetButton)
+    expect(screen.getByText('Invalid bet amount. Please enter a valid bet.')).toBeInTheDocument()
+
+    // Test bet amount greater than balance
+    fireEvent.change(betInput, { target: { value: '2000' } })
+    fireEvent.click(placeBetButton)
+    expect(screen.getByText('Invalid bet amount. Please enter a valid bet.')).toBeInTheDocument()
+  })
+
+  test('places valid bet and starts game', () => {
+    jest.spyOn(deckUtils, 'drawCard')
+      .mockReturnValueOnce([{ suit: 'spades', value: '10' }, []])
+      .mockReturnValueOnce([{ suit: 'hearts', value: '8' }, []])
+      .mockReturnValueOnce([{ suit: 'diamonds', value: '6' }, []])
+      .mockReturnValueOnce([{ suit: 'clubs', value: '4' }, []])
+
+    render(<Blackjack />)
+    
+    const betInput = screen.getByPlaceholderText('Enter bet amount')
+    const placeBetButton = screen.getByRole('button', { name: 'Place Bet' })
+
+    fireEvent.change(betInput, { target: { value: '100' } })
+    fireEvent.click(placeBetButton)
+
+    expect(screen.getByText('Your turn: Hit or Stand?')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Hit' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Stand' })).toBeInTheDocument()
+    expect(screen.getByText('Current Bet: £100')).toBeInTheDocument()
+    expect(screen.getByText('Balance: £900')).toBeInTheDocument()
+  })
+
+  test('handles player actions - hit', () => {
+    jest.spyOn(deckUtils, 'drawCard')
+      .mockReturnValueOnce([{ suit: 'spades', value: '10' }, []])
+      .mockReturnValueOnce([{ suit: 'hearts', value: '8' }, []])
+      .mockReturnValueOnce([{ suit: 'diamonds', value: '6' }, []])
+      .mockReturnValueOnce([{ suit: 'clubs', value: '4' }, []])
+      .mockReturnValueOnce([{ suit: 'hearts', value: '3' }, []])
+
+    render(<Blackjack />)
+    
+    const betInput = screen.getByPlaceholderText('Enter bet amount')
+    fireEvent.change(betInput, { target: { value: '100' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Place Bet' }))
+
+    const hitButton = screen.getByRole('button', { name: 'Hit' })
+    fireEvent.click(hitButton)
+
+    expect(screen.getByText('Your turn: Hit or Stand?')).toBeInTheDocument()
+  })
+
+  test('handles player actions - stand', () => {
+    jest.spyOn(deckUtils, 'drawCard')
+      .mockReturnValueOnce([{ suit: 'spades', value: '10' }, []])
+      .mockReturnValueOnce([{ suit: 'hearts', value: '8' }, []])
+      .mockReturnValueOnce([{ suit: 'diamonds', value: '6' }, []])
+      .mockReturnValueOnce([{ suit: 'clubs', value: '4' }, []])
+
+    render(<Blackjack />)
+    
+    const betInput = screen.getByPlaceholderText('Enter bet amount')
+    fireEvent.change(betInput, { target: { value: '100' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Place Bet' }))
+
+    const standButton = screen.getByRole('button', { name: 'Stand' })
+    fireEvent.click(standButton)
+
+    expect(screen.getByText("Dealer's turn...")).toBeInTheDocument()
+  })
+})
