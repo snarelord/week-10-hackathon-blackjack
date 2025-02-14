@@ -27,7 +27,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: ${{ github.actor }}  # GitHub username
-          password: ${{ secrets.GITHUB_TOKEN }}  # GitHub token
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}  # GitHub token
 
       # Step 4: Build Docker image
       - name: Build Docker image
