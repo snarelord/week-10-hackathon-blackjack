@@ -6,7 +6,6 @@ on:
           - main
           - feature/*
     
- 
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -32,19 +31,19 @@ jobs:
 
       # Step 4: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm ci  # use npm ci for consistency with your lock file
 
-      # Step 5: Run tests
+      # Step 5: Run tests with coverage
       - name: Run tests with coverage
         run: npm test -- --coverage
 
-      # Step 6: Display coverage report
+      # Step 6: Display coverage report (This will print the path in the logs)
       - name: Display coverage report
         run: cat ./coverage/lcov-report/index.html
 
-        # Step 7: Upload coverage report as artifact for easy download
+      # Step 7: Upload coverage report as an artifact for easy download
       - name: Upload coverage report
-      uses: actions/upload-artifact@v2
-      with:
-        name: coverage-report
-        path: ./coverage/lcov-report/index.html
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: ./coverage/lcov-report/index.html
