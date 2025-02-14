@@ -25,14 +25,14 @@ const Card = ({ suit, value, faceUp = true }: CardProps) => {
   }
 
   return (
-    <div className={`${styles.card} ${faceUp ? styles.faceUp : styles.faceDown}`}>
+    <div data-testid="card" className={`${styles.card} ${faceUp ? styles.faceUp : styles.faceDown}`}>
       {faceUp && (
-        <div className={`${styles.cardContent} ${getColor()}`}>
+        <div data-testid="card-content" className={`${styles.cardContent} ${getColor()}`}>
           <div className={styles.corner}>
             <div>{value}</div>
             <div>{getSuitSymbol(suit)}</div>
           </div>
-          <div className={styles.center}>{getSuitSymbol(suit)}</div>
+          <div data-testid="center-suit" className={styles.center}>{getSuitSymbol(suit)}</div>
           <div className={`${styles.corner} ${styles.bottomRight}`}>
             <div>{value}</div>
             <div>{getSuitSymbol(suit)}</div>
