@@ -36,5 +36,9 @@ jobs:
         run: npm install
 
       # Step 5: Run tests
-      - name: Run tests
-        run: npm test
+      - name: Run tests with coverage
+        run: npm test -- --coverage
+
+      # Step 6: Display coverage report
+      - name: Display coverage report
+        run: cat ./coverage/lcov-report/index.html
