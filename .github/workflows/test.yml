@@ -42,3 +42,10 @@ jobs:
       # Step 6: Display coverage report
       - name: Display coverage report
         run: cat ./coverage/lcov-report/index.html
+
+        # Step 7: Upload coverage report as artifact for easy download
+      - name: Upload coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: ./coverage/lcov-report/index.html
