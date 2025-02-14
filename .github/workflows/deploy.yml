@@ -19,6 +19,14 @@ jobs:
       - name: Pull Vercel Environment
         run: vercel pull --yes --token ${{ secrets.VERCEL_TOKEN }}
 
+      # Set Sentry DSN environment variable for deployment
+      - name: Set Sentry DSN
+        run: echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> $GITHUB_ENV
+
+      # Optional: Set Sentry Auth Token for deployment (if needed)
+      - name: Set Sentry Auth Token
+        run: echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> $GITHUB_ENV
+
       - name: Build Project
         run: vercel build --prod --token ${{ secrets.VERCEL_TOKEN }}
 
