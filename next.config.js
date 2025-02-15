@@ -25,13 +25,26 @@ const nextConfig = {
     parallelServerCompiles: true,
   },
   ...userConfig,
+  // Add Sentry config here
+  sentry: {
+    // This enables Sentry's webpack plugin
+    // Set to 'true' to enable Sentry integration
+    // or 'false' to disable
+    webpack: {
+      sentry: true,
+    },
+  },
 };
 
+module.exports = nextConfig;
+
+
 // Injected content via Sentry wizard below
+
 const { withSentryConfig } = require("@sentry/nextjs");
 
 module.exports = withSentryConfig(
-  nextConfig,
+  module.exports,
   {
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options
@@ -54,6 +67,9 @@ module.exports = withSentryConfig(
     },
 
     // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
+    // This can increase your server load as well as your hosting bill.
+    // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
+    // side errors will fail.
     tunnelRoute: "/monitoring",
 
     // Hides source maps from generated client bundles
@@ -63,11 +79,9 @@ module.exports = withSentryConfig(
     disableLogger: true,
 
     // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
+    // See the following for more information:
+    // https://docs.sentry.io/product/crons/
+    // https://vercel.com/docs/cron-jobs
     automaticVercelMonitors: true,
-
-    // If you want to delete sourcemaps after upload, add:
-    sentryBuildOptions: {
-      deleteSourcemapsAfterUpload: true,
-    }
   }
 );
