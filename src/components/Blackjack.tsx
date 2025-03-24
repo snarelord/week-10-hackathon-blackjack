@@ -9,9 +9,7 @@ const Blackjack = () => {
   const [deck, setDeck] = useState<CardProps[]>([]);
   const [playerHand, setPlayerHand] = useState<CardProps[]>([]);
   const [dealerHand, setDealerHand] = useState<CardProps[]>([]);
-  const [gameState, setGameState] = useState<
-    "betting" | "playing" | "dealerTurn" | "gameOver"
-  >("betting");
+  const [gameState, setGameState] = useState<"betting" | "playing" | "dealerTurn" | "gameOver">("betting");
   const [message, setMessage] = useState("");
   const [balance, setBalance] = useState(1000);
   const [currentBet, setCurrentBet] = useState(0);
@@ -166,16 +164,10 @@ const Blackjack = () => {
             <h3>Dealer's Hand</h3>
             <div className={styles.cards}>
               {dealerHand.map((card, index) => (
-                <Card
-                  key={index}
-                  {...card}
-                  faceUp={index === 0 || gameState === "gameOver"}
-                />
+                <Card key={index} {...card} faceUp={index === 0 || gameState === "gameOver"} />
               ))}
             </div>
-            {gameState === "gameOver" && (
-              <p className="total">Total: {calculateHandValue(dealerHand)}</p>
-            )}
+            {gameState === "gameOver" && <p className="total">Total: {calculateHandValue(dealerHand)}</p>}
           </div>
           <div className={styles.hand}>
             <h3>Player's Hand({calculateHandValue(playerHand)})</h3>
@@ -213,17 +205,11 @@ const Blackjack = () => {
         {gameState === "gameOver" && (
           <div className={styles.actions}>
             {balance > 0 ? (
-              <button
-                className={styles.actionButton}
-                onClick={() => resetGame()}
-              >
+              <button className={styles.actionButton} onClick={() => resetGame()}>
                 Play Again
               </button>
             ) : (
-              <button
-                className={styles.actionButton}
-                onClick={() => resetGame(1000)}
-              >
+              <button className={styles.actionButton} onClick={() => resetGame(1000)}>
                 Restart Game
               </button>
             )}

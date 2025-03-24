@@ -20,9 +20,7 @@ describe("Blackjack Component", () => {
     expect(screen.getByText("Player's Hand(0)")).toBeInTheDocument();
     expect(screen.getByText(/BALANCE:\s*£\s*1000/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Enter bet amount")).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Place Bet" })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Place Bet" })).toBeInTheDocument();
   });
 
   test("handles invalid bet input", () => {
@@ -34,16 +32,12 @@ describe("Blackjack Component", () => {
     // Test invalid bet amount
     fireEvent.change(betInput, { target: { value: "-50" } });
     fireEvent.click(placeBetButton);
-    expect(
-      screen.getByText("Invalid bet amount. Please enter a valid bet.")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Invalid bet amount. Please enter a valid bet.")).toBeInTheDocument();
 
     // Test bet amount greater than balance
     fireEvent.change(betInput, { target: { value: "2000" } });
     fireEvent.click(placeBetButton);
-    expect(
-      screen.getByText("Invalid bet amount. Please enter a valid bet.")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Invalid bet amount. Please enter a valid bet.")).toBeInTheDocument();
   });
 
   test("places valid bet and starts game", () => {
