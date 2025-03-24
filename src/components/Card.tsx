@@ -1,4 +1,4 @@
-import styles from "./Card.module.css";
+import styles from "./styles/Card.module.css";
 
 export interface CardProps {
   suit: "hearts" | "diamonds" | "clubs" | "spades";

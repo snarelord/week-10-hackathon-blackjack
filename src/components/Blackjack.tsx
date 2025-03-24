@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Card, { type CardProps } from "./Card";
 import { createBlackjackDeck, drawCard } from "@/utils/deck";
-import styles from "./Blackjack.module.css";
+import styles from "./styles/Blackjack.module.css";
 
 const Blackjack = () => {
   const [deck, setDeck] = useState<CardProps[]>([]);

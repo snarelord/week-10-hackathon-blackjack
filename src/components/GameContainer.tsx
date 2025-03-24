@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Blackjack from "./Blackjack";
-import styles from "./GameContainer.module.css";
+import styles from "./styles/GameContainer.module.css";
 
 const GameContainer = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
