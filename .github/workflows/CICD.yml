@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - feature/*
-  pull_request:  # Runs tests on PRs
+  pull_request: # Runs tests on PRs
     branches:
       - main
 
@@ -19,7 +19,7 @@ jobs:
       - name: Cache node_modules
         uses: actions/cache@v4
         with:
-          path: ~/.npm  # Cache npm instead of node_modules for better reliability
+          path: ~/.npm # Cache npm instead of node_modules for better reliability
           key: node-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             node-cache-${{ runner.os }}-
@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -43,7 +43,7 @@ jobs:
           path: ./coverage/lcov-report/
 
   build_docker:
-    needs: test  # Only build Docker if tests pass
+    needs: test # Only build Docker if tests pass
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -64,8 +64,8 @@ jobs:
           docker push daniellem62/your-image-name:${{ github.sha }}
 
   deploy:
-    needs: build_docker  # Deploy only after Docker image is built
-    if: github.event_name == 'push'  # Prevent deployment on PRs
+    needs: build_docker # Deploy only after Docker image is built
+    if: github.event_name == 'push' # Prevent deployment on PRs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository

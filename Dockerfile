@@ -34,8 +34,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-EXPOSE 3000
-ENV PORT=3000
+EXPOSE 3001
+ENV PORT=3001
 
 # Runs using node server.js instead of npm run start, which is more efficient
 CMD ["node", "server.js"] 
