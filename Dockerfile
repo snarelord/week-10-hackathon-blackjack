@@ -3,7 +3,7 @@
 # - Builder stage handles all compilation and build processes
 # - Runner stage creates the lean production image
 FROM node:18-alpine AS builder
-WORKDIR /app
+WORKDIR /src
 COPY package*.json ./
 RUN npm install
 COPY . .
@@ -11,12 +11,8 @@ RUN npm run build
 
 # Optimized Image Size:
 # Only copies specific files from builder resulting in a smaller image:
-# - /app/next.config.js
-# - /app/public 
-# - /app/.next/standalone
-# - /app/.next/static
 FROM node:18-alpine AS runner
-WORKDIR /app
+WORKDIR /src
 
 # Production Optimizations:
 # - Sets NODE_ENV production explicitly
@@ -39,10 +35,3 @@ ENV PORT=3001
 
 # Runs using node server.js instead of npm run start, which is more efficient
 CMD ["node", "server.js"] 
-
-
-
-
-
-
-

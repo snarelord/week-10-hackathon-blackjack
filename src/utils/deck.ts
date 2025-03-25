@@ -1,21 +1,7 @@
-import type { CardProps } from "@/components/Card";
+import type { CardProps } from "../components/Card";
 
 const suits: CardProps["suit"][] = ["hearts", "diamonds", "clubs", "spades"];
-const values = [
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "J",
-  "Q",
-  "K",
-  "A",
-];
+const values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 
 export const createGoFishDeck = (): CardProps[] => {
   const deck: CardProps[] = [];
