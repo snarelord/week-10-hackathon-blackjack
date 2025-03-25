@@ -19,7 +19,7 @@ jobs:
       - name: Cache node_modules
         uses: actions/cache@v4
         with:
-          path: ~/.npm # Cache npm instead of node_modules for better reliability
+          path: ~/.npm
           key: node-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             node-cache-${{ runner.os }}-
