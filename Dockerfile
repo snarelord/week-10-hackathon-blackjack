@@ -22,9 +22,7 @@ WORKDIR /src
 ENV NODE_ENV=production
 
 # Security Features:
-COPY --from=builder /src/next.config.js ./
-COPY --from=builder /src/.next/standalone ./
-COPY --from=builder /src/.next/static ./.next/static
+COPY --from=builder /src/.next /src/.next 
 
 EXPOSE 3001
 ENV PORT=3001
