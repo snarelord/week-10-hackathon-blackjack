@@ -22,16 +22,12 @@ WORKDIR /src
 ENV NODE_ENV=production
 
 # Security Features:
-# - Final image contains only runtime necessities
-# - Build tools and source code stay in builder stage
-# - Development dependencies excluded from final image
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /src/next.config.js ./
+COPY --from=builder /src/.next/standalone ./
+COPY --from=builder /src/.next/static ./.next/static
 
 EXPOSE 3001
 ENV PORT=3001
 
 # Runs using node server.js instead of npm run start, which is more efficient
-CMD ["node", "server.js"] 
+CMD ["npm", "run", "start"] 
