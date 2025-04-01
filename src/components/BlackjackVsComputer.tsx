@@ -6,11 +6,11 @@ import { createBlackjackDeck, drawCard } from "@/utils/deck";
 import Button from "./ui/Button";
 import styles from "./styles/Blackjack.module.css";
 
-interface BlackjackProps {
+interface BlackjackVsComputerProps {
   onBackToMenu: () => void;
 }
 
-const Blackjack = ({ onBackToMenu }: BlackjackProps) => {
+const BlackjackVsComputer = ({ onBackToMenu }: BlackjackVsComputerProps) => {
   const [deck, setDeck] = useState<CardProps[]>([]);
   const [playerHand, setPlayerHand] = useState<CardProps[]>([]);
   const [dealerHand, setDealerHand] = useState<CardProps[]>([]);
@@ -234,4 +234,4 @@ const Blackjack = ({ onBackToMenu }: BlackjackProps) => {
   );
 };
 
-export default Blackjack;
+export default BlackjackVsComputer;

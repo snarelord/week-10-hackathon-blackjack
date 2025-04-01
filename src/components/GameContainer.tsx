@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Blackjack from "./Blackjack";
 import styles from "./styles/GameContainer.module.css";
 import GameModeSelector from "./GameModeSelector";
 

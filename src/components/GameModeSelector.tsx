@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import styles from "./styles/GameModeSelector.module.css";
-import Blackjack from "./Blackjack";
+import BlackjackVsComputer from "./BlackjackVsComputer";
 // import BlackjackOnline from "./BlackjackOnline";
 import Card from "./ui/Card";
 import Button from "./ui/Button";
@@ -17,7 +17,7 @@ const GameModeSelector = () => {
   };
 
   if (gameMode === "singlePlayer") {
-    return <Blackjack onBackToMenu={handleBackToMenu} />;
+    return <BlackjackVsComputer onBackToMenu={handleBackToMenu} />;
   }
 
   //   if (gameMode === "online") {
