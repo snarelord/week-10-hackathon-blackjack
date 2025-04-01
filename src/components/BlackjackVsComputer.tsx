@@ -163,7 +163,7 @@ const BlackjackVsComputer = ({ onBackToMenu }: BlackjackVsComputerProps) => {
     <div className={styles.blackjack}>
       <div className={styles.gameArea}>
         <h2 className={styles.headingblackjack}>BLACKJACK</h2>
-        <Button variant="outline" size="sm" onClick={onBackToMenu}>
+        <Button className={styles.backButton} onClick={onBackToMenu}>
           Back to Menu
         </Button>
         <div className={styles.message}>{message}</div>
