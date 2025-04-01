@@ -3,9 +3,14 @@
 import { useState, useEffect } from "react";
 import Card, { type CardProps } from "./Card";
 import { createBlackjackDeck, drawCard } from "@/utils/deck";
+import Button from "./ui/Button";
 import styles from "./styles/Blackjack.module.css";
 
-const Blackjack = () => {
+interface BlackjackProps {
+  onBackToMenu: () => void;
+}
+
+const Blackjack = ({ onBackToMenu }: BlackjackProps) => {
   const [deck, setDeck] = useState<CardProps[]>([]);
   const [playerHand, setPlayerHand] = useState<CardProps[]>([]);
   const [dealerHand, setDealerHand] = useState<CardProps[]>([]);
@@ -158,6 +163,9 @@ const Blackjack = () => {
     <div className={styles.blackjack}>
       <div className={styles.gameArea}>
         <h2 className={styles.headingblackjack}>BLACKJACK</h2>
+        <Button variant="outline" size="sm" onClick={onBackToMenu}>
+          Back to Menu
+        </Button>
         <div className={styles.message}>{message}</div>
         <div className={styles.hands}>
           <div className={styles.hand}>

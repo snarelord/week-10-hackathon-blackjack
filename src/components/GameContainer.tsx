@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Blackjack from "./Blackjack";
 import styles from "./styles/GameContainer.module.css";
+import GameModeSelector from "./GameModeSelector";
 
 const GameContainer = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -19,7 +20,7 @@ const GameContainer = () => {
             {isDarkMode ? "☀️" : "🌙"}
           </button>
         </div>
-        <Blackjack />
+        <GameModeSelector />
       </div>
     </div>
   );
