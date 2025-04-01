@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import Blackjack from "../Blackjack";
+import BlackjackVsComputer from "../BlackjackVsComputer";
 import * as deckUtils from "@/utils/deck";
 // import { calculateHandValue, playerHand } from "./Blackjack";
 
@@ -13,7 +13,13 @@ describe("Blackjack Component", () => {
   });
 
   test("renders initial game state", () => {
-    render(<Blackjack />);
+    render(
+      <BlackjackVsComputer
+        onBackToMenu={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+    );
 
     expect(screen.getByText("BLACKJACK")).toBeInTheDocument();
     expect(screen.getByText("Dealer's Hand")).toBeInTheDocument();
@@ -24,7 +30,13 @@ describe("Blackjack Component", () => {
   });
 
   test("handles invalid bet input", () => {
-    render(<Blackjack />);
+    render(
+      <BlackjackVsComputer
+        onBackToMenu={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+    );
 
     const betInput = screen.getByPlaceholderText("Enter bet amount");
     const placeBetButton = screen.getByRole("button", { name: "Place Bet" });
@@ -48,7 +60,13 @@ describe("Blackjack Component", () => {
       .mockReturnValueOnce([{ suit: "diamonds", value: "6" }, []])
       .mockReturnValueOnce([{ suit: "clubs", value: "4" }, []]);
 
-    render(<Blackjack />);
+    render(
+      <BlackjackVsComputer
+        onBackToMenu={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+    );
 
     const betInput = screen.getByPlaceholderText("Enter bet amount");
     const placeBetButton = screen.getByRole("button", { name: "Place Bet" });
@@ -72,7 +90,13 @@ describe("Blackjack Component", () => {
       .mockReturnValueOnce([{ suit: "clubs", value: "4" }, []])
       .mockReturnValueOnce([{ suit: "hearts", value: "3" }, []]);
 
-    render(<Blackjack />);
+    render(
+      <BlackjackVsComputer
+        onBackToMenu={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+    );
 
     const betInput = screen.getByPlaceholderText("Enter bet amount");
     fireEvent.change(betInput, { target: { value: "100" } });
@@ -92,7 +116,13 @@ describe("Blackjack Component", () => {
       .mockReturnValueOnce([{ suit: "diamonds", value: "6" }, []])
       .mockReturnValueOnce([{ suit: "clubs", value: "4" }, []]);
 
-    render(<Blackjack />);
+    render(
+      <BlackjackVsComputer
+        onBackToMenu={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
+    );
 
     const betInput = screen.getByPlaceholderText("Enter bet amount");
     fireEvent.change(betInput, { target: { value: "100" } });
