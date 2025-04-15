@@ -34,8 +34,8 @@ const GameModeSelector = () => {
         <Button size="lg" className={styles.option} onClick={() => setGameMode("singlePlayer")}>
           Play vs Computer
         </Button>
-        <Button size="lg" className={styles.option} onClick={() => setGameMode("online")}>
-          Play Online
+        <Button size="lg" className={styles.optionOnline} onClick={() => setGameMode("online")}>
+          ONLINE COMING SOON
         </Button>
       </div>
     </Card>

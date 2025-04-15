@@ -44,6 +44,20 @@
   min-width: 250px;
 }
 
+.optionOnline {
+  background-color: grey;
+  color: #ffdb26;
+  border: none;
+  padding: 20px 40px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  min-width: 250px;
+}
+
 .option:hover {
   background-color: #f4c430;
   color: #000;
