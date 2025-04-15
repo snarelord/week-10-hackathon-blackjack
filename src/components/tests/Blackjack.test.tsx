@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import BlackjackVsComputer from "../BlackjackVsComputer";
+import BlackjackVsComputer from "../BlackjackVsComputer/BlackjackVsComputer";
 import * as deckUtils from "@/utils/deck";
 // import { calculateHandValue, playerHand } from "./Blackjack";
 

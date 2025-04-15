@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import styles from "./styles/GameModeSelector.module.css";
-import BlackjackVsComputer from "./BlackjackVsComputer";
+import BlackjackVsComputer from "./BlackjackVsComputer/BlackjackVsComputer";
 // import BlackjackOnline from "./BlackjackOnline";
 import Card from "./ui/Card";
 import Button from "./ui/Button";

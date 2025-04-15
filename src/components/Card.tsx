@@ -7,7 +7,7 @@ export interface CardProps {
 }
 
 const Card = ({ suit, value, faceUp = true }: CardProps) => {
-  const getColor = () => {
+  const getColour = () => {
     return suit === "hearts" || suit === "diamonds" ? styles.red : styles.black;
   };
 
@@ -27,7 +27,7 @@ const Card = ({ suit, value, faceUp = true }: CardProps) => {
   return (
     <div data-testid="card" className={`${styles.card} ${faceUp ? styles.faceUp : styles.faceDown}`}>
       {faceUp && (
-        <div data-testid="card-content" className={`${styles.cardContent} ${getColor()}`}>
+        <div data-testid="card-content" className={`${styles.cardContent} ${getColour()}`}>
           <div className={styles.corner}>
             <div>{value}</div>
             <div>{getSuitSymbol(suit)}</div>

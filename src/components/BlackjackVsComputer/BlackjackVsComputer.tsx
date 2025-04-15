@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Card, { type CardProps } from "./Card";
+import Card, { type CardProps } from "../Card";
 import { createBlackjackDeck, drawCard } from "@/utils/deck";
-import Button from "./ui/Button";
-import styles from "./styles/BlackjackVsComputer.module.css";
+import calculateHandValue from "@/utils/calculateHandValue";
+import Button from "../ui/Button";
+import styles from "../styles/BlackjackVsComputer.module.css";
 
 interface BlackjackVsComputerProps {
   onBackToMenu: () => void;
@@ -120,31 +121,6 @@ const BlackjackVsComputer = ({ onBackToMenu }: BlackjackVsComputerProps) => {
     }
 
     setGameState("gameOver");
-  };
-
-  const calculateHandValue = (hand: CardProps[]): number => {
-    let value = 0;
-    let aces = 0;
-
-    for (const card of hand) {
-      if (card.value === "A") {
-        aces += 1;
-      } else if (["K", "Q", "J"].includes(card.value)) {
-        value += 10;
-      } else {
-        value += Number.parseInt(card.value);
-      }
-    }
-
-    for (let i = 0; i < aces; i++) {
-      if (value + 11 <= 21) {
-        value += 11;
-      } else {
-        value += 1;
-      }
-    }
-
-    return value;
   };
 
   const endRound = (playerWins: boolean, tie = false) => {
